@@ -24,7 +24,13 @@ import {
 import type { BitacoraApi, EventoBitacora } from "./api";
 import { ordenarRecientes } from "./ordenar";
 
-const ACTORES: Record<string, string> = { eira: "Eira", municipio: "Municipio", sistema: "Sistema" };
+const ACTORES: Record<string, string> = {
+  eira: "Eira",
+  coordinacion: "Eira",
+  municipio: "Municipio",
+  sistema: "Sistema",
+  seed_demo: "Carga de ejemplo",
+};
 
 const TIPOS: Record<string, string> = {
   carta: "Carta compromiso",

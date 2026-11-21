@@ -46,3 +46,24 @@ describe("bitacora", () => {
     expect(subida).toHaveTextContent(/subió la versión 1 de Fotografías/i);
   });
 });
+
+describe("bitacora con los actores que emite el servidor", () => {
+  it("muestra_nombres_legibles_de_coordinacion_y_seed_demo", async () => {
+    const reales: EventoBitacora[] = [
+      { id: 1, jornada_id: 7, actor: "seed_demo", accion: "jornada_creada", detalle: { requisitos: 4 }, creado_en: "2026-11-20T10:00:00.000Z" },
+      { id: 2, jornada_id: 7, actor: "coordinacion", accion: "documento_aprobado", detalle: { documento_id: 3, tipo: "fotografias" }, creado_en: "2026-11-20T12:00:00.000Z" },
+    ];
+    const api: BitacoraApi = { eventos: async () => reales };
+    render(
+      <MemoryRouter>
+        <Bitacora jornadaId="7" api={api} />
+      </MemoryRouter>,
+    );
+    const lista = await screen.findByRole("list", { name: "Cambios de la jornada" });
+    expect(lista.textContent).not.toContain("coordinacion");
+    expect(lista.textContent).not.toContain("seed_demo");
+    const filas = within(lista).getAllByRole("listitem");
+    expect(filas[0]).toHaveTextContent("Eira aprobó Fotografías");
+    expect(filas[1]).toHaveTextContent("Carga de ejemplo creó la jornada");
+  });
+});
