@@ -12,6 +12,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795280509	hook-digest	-	0	-	3752	-	other
 1795280834	hook-digest	-	0	-	3842	-	other
 1795281174	hook-digest	-	0	-	4084	-	other
@@ -73,3 +74,7 @@
 1795285117	design	-	-	-	-	devin-1	other
 1795285167	design	-	-	-	-	devin-1	other
 1795285212	heartbeat	HACK-002	0	-	40891	devin-1	other
+1795285624	next	-	0	-	13528	claude-1	claude-code
+1795285859	red	HACK-003	-	-	-	claude-1	claude-code
+1795285912	red	HACK-003	-	-	-	claude-1	claude-code
+1795286047	red	HACK-003	-	-	-	claude-1	claude-code
