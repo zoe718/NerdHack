@@ -32,6 +32,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795280509	hook-digest	-	0	-	3752	-	other
 1795280834	hook-digest	-	0	-	3842	-	other
 1795281174	hook-digest	-	0	-	4084	-	other
@@ -235,3 +236,15 @@
 1795291115	hook-digest	-	0	-	6906	-	claude-code
 1795291211	hook-digest	-	0	-	5646	-	claude-code
 1795291298	hook-digest	-	0	-	5404	-	claude-code
+1795290954	checkpoint	HACK-007	0	-	25680	devin-1	other
+1795290978	next	-	0	-	12955	devin-1	other
+1795290978	board	-	-	-	-	-	other
+1795290999	inbox	-	0	-	3794	devin-1	other
+1795291040	review	HACK-004	0	-	10859	devin-1	other
+1795291203	integrate	HACK-007	0	-	14686	zoe718	other
+1795291470	review	HACK-004	0	-	12955	devin-1	other
+1795291481	inbox	-	0	-	10568	devin-1	other
+1795291513	next	-	0	-	10699	devin-1	other
+1795291513	board	-	-	-	-	-	other
+1795291549	integrate	HACK-004	0	-	15518	devin-1	other
+1795291566	next	-	0	-	16689	devin-1	other
