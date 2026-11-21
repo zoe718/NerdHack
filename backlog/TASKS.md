@@ -197,3 +197,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor
 - **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+
+## HACK-015 · Guion y README: crear jornada y enviar acceso ya tienen pantalla (HACK-013) (follow-up of HACK-005)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-005
+- **Follow-up of:** HACK-005
+- **Paths:** web/src/features/landing/, demo/, README.md
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Guion y README: crear jornada y enviar acceso ya tienen pantalla (HACK-013)
+- **Verify:** `npm --prefix web run build && bash .uak/bin/design-lint`
