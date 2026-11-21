@@ -173,3 +173,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - App.tsx registra la ruta y la vista que exporta cada feature, para que 006, 007, 008 y 010 no lo editen
 - **Verify:** `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png && bash .uak/bin/uak lint`
+
+## HACK-013 · Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta (follow-up of HACK-004)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-004
+- **Follow-up of:** HACK-004
+- **Paths:** web/src/features/municipio/, web/src/features/panel/, web/src/lib/api.ts, web/src/mocks/
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
