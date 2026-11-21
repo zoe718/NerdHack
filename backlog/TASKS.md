@@ -209,3 +209,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Guion y README: crear jornada y enviar acceso ya tienen pantalla (HACK-013)
 - **Verify:** `npm --prefix web run build && bash .uak/bin/design-lint`
+
+## HACK-016 · Portada: quitar el boton Ver el codigo (follow-up of HACK-005)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-005
+- **Follow-up of:** HACK-005
+- **Paths:** web/src/features/landing/, demo/, README.md
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Portada: quitar el boton Ver el codigo
+- **Verify:** `npm --prefix web run build && bash .uak/bin/design-lint`
