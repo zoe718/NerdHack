@@ -132,7 +132,7 @@ export default function Panel() {
                         <span className="w-28 text-right text-base font-semibold text-fg tabular-nums">
                           {j.dias_restantes < 0 ? "Ya pasó" : `Faltan ${j.dias_restantes} días`}
                         </span>
-                        <Button variant="secondary" size="sm" onClick={() => navegar(`/m/${j.id}`)}>
+                        <Button variant="secondary" size="sm" onClick={() => navegar(`/panel/${j.id}/revision`)}>
                           Abrir expediente
                         </Button>
                       </>
