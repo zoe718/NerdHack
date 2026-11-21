@@ -9,6 +9,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795280509	hook-digest	-	0	-	3752	-	other
 1795280834	hook-digest	-	0	-	3842	-	other
 1795281174	hook-digest	-	0	-	4084	-	other
@@ -49,3 +50,14 @@
 1795284829	hook-digest	-	0	-	4678	-	claude-code
 1795284954	hook-digest	-	0	-	4904	-	claude-code
 1795285103	hook-digest	-	0	-	5496	-	claude-code
+1795284962	red	HACK-001	-	-	-	claude-1	claude-code
+1795284973	red	HACK-001	-	-	-	claude-1	claude-code
+1795285249	init-smoke	-	0	-	2695	claude-1	claude-code
+1795285299	done	HACK-001	2	error	2740	claude-1	claude-code
+1795285338	done	HACK-001	0	-	34234	claude-1	claude-code
+1795285420	integrate	HACK-001	3	conflict	14638	claude-1	claude-code
+1795285474	integrate	HACK-001	0	-	39432	zoe718	claude-code
+1795285494	next	-	0	-	12470	claude-1	claude-code
+1795285529	claim	HACK-003	0	-	21638	claude-1	claude-code
+1795285534	inbox	-	0	-	4464	claude-1	claude-code
+1795285543	status	HACK-003	0	-	7620	claude-1	claude-code
