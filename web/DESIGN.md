@@ -45,6 +45,7 @@ Un estado nunca se dice solo con color: lleva lámpara o ícono y la palabra.
 - At 390 wide: quedan la marca y el indicador de acceso; con más de una vista, las vistas pasan a una fila de pestañas bajo la barra.
 - UI kit en `web/src/lib/ui/`: `Button`, `Surface`, `Chip`, `EstadoChip`, `DemoBadge`, `Lamp`, `Semaforo`, `Legend`, `Stat`, `Row`, `RowList`, `SectionHeader`, `Steps`, `TextField`, `TextAreaField`, `ProtectedBlock`, `EmptyState`, `ErrorState`, `Skeleton`, `EnVivo`.
 - Íconos: solo los de `icons.ts` (Phosphor regular, 20 px; 16 px dentro de chips). Un ícono nuevo se agrega ahí.
+- Rutas: cada `web/src/features/NOMBRE/index.tsx` exporta su componente por defecto y `ruta` (`path` y `rol`: eira, municipio o publico); si va en la barra de Eira exporta también `vista` (`etiqueta`, `orden`). `App.tsx` las registra solas: ninguna feature edita `App.tsx`.
 - Todo dato de ejemplo lleva `DemoBadge` ("Datos de ejemplo") en el `PageHeader`.
 
 ## Screens: one recipe and one hero each
