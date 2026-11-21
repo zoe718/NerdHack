@@ -9,10 +9,10 @@ Priority: P0
 Paths: web/src/features/revision/
 Depends: HACK-002
 Verify: `npm --prefix web run build && npm --prefix web test -- --run`
-Lease-Until: 1795304661
-Updated: 1795290261
+Lease-Until: 1795304706
+Updated: 1795290306
 Task-Base: 11cb8fd6f2ccc8a4aef1312c6b18975ea987c481
-Next: Another agent reviews https://github.com/zoe718/NerdHack/pull/10; run .uak/bin/smoke
+Next: Wait for review of SHA fafbcf6
 PR: https://github.com/zoe718/NerdHack/pull/10
 Evidence: -
 Thread-Read: 0
