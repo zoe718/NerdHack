@@ -11,3 +11,4 @@
 ## History
 - 1795289045 | CLAIMED | claude-1 | claim; next: leer `web/DESIGN.md`, escribir los tests en vitest y `uak red HACK-004` | Harness: unknown | Model: unknown
 - 1795290529 | REVIEW | claude-1 | done; PR https://github.com/zoe718/NerdHack/pull/11; evidence: build+test OK, shots panel/municipio 1280/390, 0 console errors · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log) · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log) · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log); reviewer: - | Harness: unknown | Model: unknown
+- 1795291457 | REVIEW | devin-1 | review; approve; SHA c85e1965d9391d82ba5397f29572c72a80f07239; reviewer devin-1 | Harness: unknown | Model: unknown
