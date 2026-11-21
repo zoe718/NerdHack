@@ -10,3 +10,4 @@
 
 ## History
 - 1795289192 | CLAIMED | devin-1 | claim; next: leer `web/DESIGN.md`, tests en vitest y `uak red HACK-006` | Harness: unknown | Model: unknown
+- 1795289394 | AVAILABLE | devin-1 | release; claim released by devin-1; reason: -; summary kept | Harness: unknown | Model: unknown
