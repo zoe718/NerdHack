@@ -149,3 +149,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Tests:** bitacora_ordena_eventos_recientes_primero, muestra_actor_y_accion
 - **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
 - **Next step:** tests en vitest y `uak red HACK-010`
+
+## HACK-011 · Seed de datos demo, core.test con mkdtemp y despachador de recordatorios en index.js (follow-up of HACK-001)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-001
+- **Follow-up of:** HACK-001
+- **Paths:** package.json, package-lock.json, server/app.js, server/index.js, server/db.js, server/kv.js, server/semaforo.js, server/routes/jornadas.js, server/routes/documentos.js, server/routes/panorama.js, server/tests/core.test.js, schemas/, docker-compose.yml, Dockerfile, render.yaml, .env.example, .gitignore
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Seed de datos demo, core.test con mkdtemp y despachador de recordatorios en index.js
+- **Verify:** `npm test`
