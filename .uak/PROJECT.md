@@ -12,7 +12,7 @@
 | Design lock | 11:15 |
 | First claim by | 11:24 · walking skeleton 11:30 |
 | Plan-B video | 13:30 |
-| Freeze | 15:15 · `Freeze-Epoch: 1795274100` (uak clock) |
+| Freeze | 15:15 · `Freeze-Epoch: 1795295700` (uak clock) |
 | Clean rehearsal / plan B | 15:36 |
 | Internal submission | 15:45 |
 | Humans | zoe718: dueño del producto · submission owner: zoe718 |
@@ -43,12 +43,12 @@ A human sets `yes`. A missing field means `no`.
 ```text
 Mode: sprint
 Backlog-Proposed-Epoch: 0
-Backlog-Approved: no
+Backlog-Approved: yes
 Autonomy: yes
 Auto-Merge: yes
 Review-Mode: claims
 Plan-Channel: claims
-Freeze-Epoch: 1795274100
+Freeze-Epoch: 1795295700
 Lease-Seconds: 2700
 Review-Lease-Seconds: 14400
 Events-Per-Session: 100
