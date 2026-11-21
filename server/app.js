@@ -7,6 +7,8 @@ const express = require('express');
 const { createDb, repo } = require('./db');
 const { createKv } = require('./kv');
 const { hoyISO } = require('./semaforo');
+const { despachar } = require('./reminders');
+const { registrar } = require('./audit');
 
 const RUTAS_DIR = path.join(__dirname, 'routes');
 
@@ -35,6 +37,14 @@ function createApp({
       Promise.resolve(store.publish(`jornada:${jornadaId}`, JSON.stringify({ evento, jornada_id: jornadaId })))
         .catch(() => {});
     },
+    // Envía lo vencido (T-21/T-14) y lo deja en bitácora. index.js lo llama cada minuto.
+    despacharRecordatorios: () => despachar(store, now(), async (m) => {
+      const [jid, tipo] = String(m).split(':');
+      const id = Number(jid);
+      if (!ctx.repo.jornada(id)) return;
+      registrar(ctx, id, 'sistema', 'recordatorio_enviado', { tipo });
+      ctx.publicar(id, 'recordatorio');
+    }),
   };
 
   const app = express();

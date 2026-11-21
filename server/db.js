@@ -141,4 +141,18 @@ function repo(db) {
   };
 }
 
-module.exports = { createDb, repo, REQUISITOS_DEFAULT };
+// Siembra las jornadas ficticias de schemas/demo.json. Idempotente: salta municipios que ya existan.
+function sembrarDemo(db, ahora = new Date()) {
+  const demo = require('../schemas/demo.json');
+  const r = repo(db);
+  const ts = new Date(ahora).toISOString();
+  let n = 0;
+  for (const j of demo.jornadas) {
+    if (db.prepare('SELECT 1 FROM municipios WHERE nombre = ?').get(j.municipio.nombre)) continue;
+    r.crearJornada({ ...j, requisitos: r.requisitos().map((c) => ({ ...c, fecha_limite: null })), actor: 'seed_demo' }, ts);
+    n++;
+  }
+  return n;
+}
+
+module.exports = { createDb, repo, sembrarDemo, REQUISITOS_DEFAULT };

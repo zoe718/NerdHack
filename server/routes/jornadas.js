@@ -1,13 +1,14 @@
 'use strict';
 const express = require('express');
 const { evaluarJornada } = require('../semaforo');
+const { programar } = require('../reminders');
 
 const FECHA = /^\d{4}-\d{2}-\d{2}$/;
 
 module.exports = (ctx) => {
   const r = express.Router();
 
-  r.post('/jornadas', (req, res) => {
+  r.post('/jornadas', async (req, res) => {
     const b = req.body || {};
     const municipioOk = b.municipio_id || (b.municipio && typeof b.municipio.nombre === 'string' && b.municipio.nombre.trim());
     if (!municipioOk) return res.status(400).json({ error: 'municipio.nombre o municipio_id es obligatorio' });
@@ -29,6 +30,7 @@ module.exports = (ctx) => {
       actor: req.get('x-actor') || 'coordinacion',
     }, ctx.ts());
     ctx.publicar(id, 'jornada_creada');
+    await programar(ctx.kv, id, b.fecha).catch(() => {});
     res.status(201).json(evaluarJornada(ctx.repo.jornada(id), ctx.hoy()));
   });
 
