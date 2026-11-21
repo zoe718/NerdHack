@@ -13,3 +13,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795290942 | HACK-007 | persona enlace se guarda en responsables | Why: es el campo que expone la API de carta
 - 1795293089 | HACK-013 | follow-up of HACK-004 by claude-1: Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta | Why: same Paths, no scope change
 - 1795293467 | HACK-005 | video en webm | Why: sin codificador H.264 en esta maquina
+- 1795294051 | HACK-014 | follow-up of HACK-010 by devin-1: Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor | Why: same Paths, no scope change

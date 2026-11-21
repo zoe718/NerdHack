@@ -185,3 +185,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta
 - **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+
+## HACK-014 · Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor (follow-up of HACK-010)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-010
+- **Follow-up of:** HACK-010
+- **Paths:** web/src/features/bitacora/
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
