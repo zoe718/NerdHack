@@ -1,8 +1,8 @@
 # STATE
 
-Phase: feature freeze; authorized fixes, rehearsal and submission only
-Updated: 1795283923
-AVAILABLE: -
+Phase: execution
+Updated: 1795284250
+AVAILABLE: HACK-001 HACK-002 HACK-003 HACK-004 HACK-005 HACK-001 HACK-002 HACK-003 HACK-004 HACK-005 
 CLAIMED: -
 BLOCKED: -
 REVIEW: -
