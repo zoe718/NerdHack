@@ -1,7 +1,7 @@
 # STATE
 
 Phase: feature freeze; authorized fixes, rehearsal and submission only
-Updated: 1795295834
+Updated: 1795299329
 AVAILABLE: -
 CLAIMED: -
 BLOCKED: -
@@ -13,11 +13,11 @@ Claims (first 24; status --task ID shows detail):
 
 Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
-- 1795293089 | HACK-013 | follow-up of HACK-004 by claude-1: Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta | Why: same Paths, no scope chan
 - 1795293467 | HACK-005 | video en webm | Why: sin codificador H.264 en esta maquina
 - 1795294051 | HACK-014 | follow-up of HACK-010 by devin-1: Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor | Why: same Paths, no scope c
 - 1795294825 | HACK-015 | follow-up of HACK-005 by claude-1: Guion y README: crear jornada y enviar acceso ya tienen pantalla (HACK-013) | Why: same Paths, no scope change
 - 1795295713 | allow | zoe718 | freeze exception: HACK-015 | Why: extensión oficial a las 16:00
+- 1795299329 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.

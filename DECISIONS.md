@@ -16,3 +16,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795294051 | HACK-014 | follow-up of HACK-010 by devin-1: Bitacora: nombres legibles para los actores coordinacion y seed_demo que emite el servidor | Why: same Paths, no scope change
 - 1795294825 | HACK-015 | follow-up of HACK-005 by claude-1: Guion y README: crear jornada y enviar acceso ya tienen pantalla (HACK-013) | Why: same Paths, no scope change
 - 1795295713 | allow | zoe718 | freeze exception: HACK-015 | Why: extensión oficial a las 16:00
+- 1795299329 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
