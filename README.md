@@ -39,7 +39,7 @@ Semáforo, calculado y nunca guardado: verde si está aprobado o faltan más de 
 | Envío de correo | Simulado: no sale ningún correo; el enlace se pide por API y los recordatorios quedan en la bitácora |
 | Paso del tiempo | Simulado con `DEMO_CLOCK_OFFSET_DAYS` |
 | Firma de la carta | Simulada: guardar no es firmar ni aprobar |
-| Crear jornada y enviar el acceso desde una pantalla | Falta: hoy se hace por API (abajo) |
+| Crear jornada y enviar el acceso desde `/panel` | Implementado; como no sale correo, el enlace se muestra en pantalla (solo demo) |
 | Sesiones y roles en el servidor | Falta: la API no exige sesión; el enlace de un solo uso funciona, pero no protege las demás rutas |
 | Valkey administrado, respaldos, cifrado | Diseñado, no implementado |
 
@@ -58,7 +58,7 @@ Para desarrollo: `node server/index.js` y, en otra terminal, `npm --prefix web r
 
 Variables (`.env.example`): `PORT`, `DB_PATH`, `UPLOAD_DIR`, `USE_VALKEY`, `VALKEY_URL`, `SEED_DEMO`, `DEMO_CLOCK_OFFSET_DAYS`. Con `USE_VALKEY=false` (por defecto) todo corre en memoria.
 
-Pasos que todavía no tienen pantalla:
+Lo mismo por API (en la app: `/panel`, Nueva jornada y Enviar acceso):
 
 ```bash
 # crear una jornada ficticia
