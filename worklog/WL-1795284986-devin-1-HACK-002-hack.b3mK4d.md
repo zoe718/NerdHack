@@ -13,3 +13,4 @@
 - 1795285200 | CLAIMED | devin-1 | heartbeat; lease until 1795287900 | Harness: unknown | Model: unknown
 - 1795286331 | CLAIMED | devin-1 | heartbeat; lease until 1795289031 | Harness: unknown | Model: unknown
 - 1795287129 | CLAIMED | devin-1 | heartbeat; lease until 1795289829 | Harness: unknown | Model: unknown
+- 1795287638 | CLAIMED | devin-1 | pending decision HACK-002-1795287638; option: Direction 1: Rosa y berenjena; Why: zoe718 la eligio mirando la galeria de 4 direcciones sobre las pantallas reales (panel, municipio, carta); clara, barra berenjena, acciones en rosa Eira | Harness: unknown | Model: unknown
