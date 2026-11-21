@@ -9,14 +9,17 @@ Priority: P0
 Paths: web/src/features/landing/, demo/, README.md
 Depends: HACK-002, HACK-004
 Verify: `npm --prefix web run build && bash .uak/bin/design-lint`
-Lease-Until: 1795294328
-Updated: 1795291628
+Lease-Until: 1795295622
+Updated: 1795292922
 Task-Base: f28469ab643c1c97d06be2b8275770bd0cc7c2b5
 Next: skill `landing-story` con IDEA.md y capturas de HACK-004
 PR: -
 Evidence: -
 Participants: author devin-1 (unknown)
-Events: 1
+Events: 2
 Checkpoints: 0
 Sessions: 1
 Last-Checkpoint: 0
+Progress: 0 commit(s) since the claim · last: f28469a Merge pull request #13 from zoe718/feat/hack-008 (23 minutes ago) · 0 uncommitted tracked file(s) · at 1795292922
+Progress-Head: f28469a/1051512484
+Progress-Changed: 1795292922

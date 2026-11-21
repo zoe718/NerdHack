@@ -9,8 +9,8 @@ Priority: P0
 Paths: web/src/features/landing/, demo/, README.md
 Depends: HACK-002, HACK-004
 Verify: `npm --prefix web run build && bash .uak/bin/design-lint`
-Lease-Until: 1795294328
-Updated: 1795291628
+Lease-Until: 1795295622
+Updated: 1795292922
 Task-Base: f28469ab643c1c97d06be2b8275770bd0cc7c2b5
 Next: skill `landing-story` con IDEA.md y capturas de HACK-004
 PR: -
