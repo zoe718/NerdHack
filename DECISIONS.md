@@ -18,3 +18,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795295713 | allow | zoe718 | freeze exception: HACK-015 | Why: extensión oficial a las 16:00
 - 1795299329 | deadline freeze/event/1795295700 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
 - 1795299409 | HACK-016 | follow-up of HACK-005 by devin-1: Portada: quitar el boton Ver el codigo | Why: same Paths, no scope change
+- 1795301339 | allow | zoe718 | freeze exception: HACK-016 | Why: Cambio permitido por los organizadores: quitar los enlaces al repositorio de la portada
