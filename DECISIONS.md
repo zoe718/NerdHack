@@ -12,3 +12,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795290306 | HACK-006 | API propia en features/revision/api.ts | Why: web/src/lib/api.ts es de HACK-004 y no esta en main
 - 1795290942 | HACK-007 | persona enlace se guarda en responsables | Why: es el campo que expone la API de carta
 - 1795293089 | HACK-013 | follow-up of HACK-004 by claude-1: Camino demo: crear jornada y enviar acceso desde el panel, municipio enlaza a su carta | Why: same Paths, no scope change
+- 1795293467 | HACK-005 | video en webm | Why: sin codificador H.264 en esta maquina

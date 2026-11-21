@@ -9,10 +9,10 @@ Priority: P0
 Paths: web/src/features/landing/, demo/, README.md
 Depends: HACK-002, HACK-004
 Verify: `npm --prefix web run build && bash .uak/bin/design-lint`
-Lease-Until: 1795307727
-Updated: 1795293327
+Lease-Until: 1795307867
+Updated: 1795293467
 Task-Base: f28469ab643c1c97d06be2b8275770bd0cc7c2b5
-Next: Another agent reviews https://github.com/zoe718/NerdHack/pull/15; run .uak/bin/smoke
+Next: Wait for review of SHA 2b062da
 PR: https://github.com/zoe718/NerdHack/pull/15
 Evidence: -
 Thread-Read: 0
