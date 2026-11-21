@@ -1,0 +1,15 @@
+{
+  "demo_data": true,
+  "nota": "Municipios, sedes y personas ficticios para la demo. No son datos reales.",
+  "jornadas": [
+    { "municipio": { "nombre": "San Ejemplo de las Flores", "contacto_email": "enlace@san-ejemplo.test" },
+      "sede": "Auditorio Municipal Ficticio", "fecha": "2026-12-12",
+      "servicios": ["mastografía", "exploración clínica"], "responsables": ["Coordinadora Demo A"] },
+    { "municipio": { "nombre": "Villa Prueba del Valle", "contacto_email": "salud@villa-prueba.test" },
+      "sede": "Centro Comunitario Demo", "fecha": "2027-01-16",
+      "servicios": ["mastografía", "papanicolaou"], "responsables": ["Coordinador Demo B"] },
+    { "municipio": { "nombre": "Santa Muestra", "contacto_email": "dif@santa-muestra.test" },
+      "sede": "Explanada del DIF Ficticio", "fecha": "2027-02-06",
+      "servicios": ["exploración clínica", "orientación nutricional"], "responsables": ["Coordinadora Demo C"] }
+  ]
+}

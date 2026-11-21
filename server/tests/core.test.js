@@ -14,7 +14,7 @@ function enDias(n) {
 }
 
 async function levantar() {
-  const { app, close } = createApp({ dbPath: ':memory:', useValkey: false, now: () => HOY, uploadDir: require('node:os').tmpdir() });
+  const { app, close } = createApp({ dbPath: ':memory:', useValkey: false, now: () => HOY, uploadDir: require('node:fs').mkdtempSync(require('node:path').join(require('node:os').tmpdir(), 'jl-core-')) });
   const server = await new Promise((r) => { const s = app.listen(0, () => r(s)); });
   const base = `http://127.0.0.1:${server.address().port}/api`;
   return { base, stop: () => { server.close(); close(); } };
@@ -112,4 +112,45 @@ test('panorama_ordena_por_riesgo', async () => {
     assert.deepEqual(jornadas.map((j) => j.municipio.nombre), ['Villa Urgente', 'Villa Media', 'Villa Tranquila']);
     assert.deepEqual(jornadas.map((j) => j.semaforo), ['rojo', 'ambar', 'verde']);
   } finally { stop(); }
+});
+
+// HACK-011: seed demo, recordatorios al crear y despachador.
+const { createDb, repo, sembrarDemo } = require('../db');
+
+test('seed_demo_crea_jornadas_ficticias_una_vez', () => {
+  const db = createDb(':memory:');
+  try {
+    const demo = require('../../schemas/demo.json');
+    assert.equal(demo.demo_data, true);
+    const n1 = sembrarDemo(db, HOY);
+    const n2 = sembrarDemo(db, HOY);
+    assert.ok(n1 >= 3, `sembró ${n1}`);
+    assert.equal(n2, 0);
+    assert.equal(repo(db).jornadaIds().length, n1);
+  } finally { db.close(); }
+});
+
+test('crear_jornada_programa_recordatorios_t21_t14', async () => {
+  const { app, ctx, close } = createApp({ dbPath: ':memory:', useValkey: false, now: () => HOY,
+    uploadDir: require('node:fs').mkdtempSync(require('node:path').join(require('node:os').tmpdir(), 'jl-rem-')) });
+  const server = await new Promise((r) => { const s = app.listen(0, () => r(s)); });
+  try {
+    const { body } = await crearJornada(`http://127.0.0.1:${server.address().port}/api`, { fecha: enDias(30) });
+    const prog = await ctx.kv.zrangebyscore('reminders', '-inf', '+inf');
+    assert.deepEqual(prog.sort(), [`${body.id}:T-14`, `${body.id}:T-21`]);
+  } finally { server.close(); close(); }
+});
+
+test('despachador_registra_recordatorio_en_bitacora', async () => {
+  const LUNES = new Date('2026-11-23T17:00:00Z'); // 11:00 en CDMX
+  const { app, ctx, close } = createApp({ dbPath: ':memory:', useValkey: false, now: () => LUNES,
+    uploadDir: require('node:fs').mkdtempSync(require('node:path').join(require('node:os').tmpdir(), 'jl-desp-')) });
+  const server = await new Promise((r) => { const s = app.listen(0, () => r(s)); });
+  try {
+    const { body } = await crearJornada(`http://127.0.0.1:${server.address().port}/api`, { fecha: '2026-12-10' });
+    const enviados = await ctx.despacharRecordatorios();
+    assert.deepEqual(enviados, [`${body.id}:T-21`]);
+    const acciones = ctx.repo.auditoria(body.id).map((e) => e.accion);
+    assert.ok(acciones.includes('recordatorio_enviado'), acciones.join(','));
+  } finally { server.close(); close(); }
 });
