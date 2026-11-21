@@ -1,0 +1,232 @@
+#!/usr/bin/env python3
+"""UAK-036: the token bill covers every machine. deus-ex-machina published tokens from 1 of 3 Macs (185 M tokens, 100 %
+"main"); DevDay 406 M with 78 % "main". A failed background publish now leaves a black box line with the reason,
+`tokens --team` names the machines that worked but never published, and the main checkout's share is shown and warned
+above 50 %. The hooks publish from session-start and from the Codex tick too. Real Git, a local bare remote, fake
+transcripts under a throwaway CLAUDE_CONFIG_DIR."""
+import argparse
+import concurrent.futures
+import os
+import re
+import shutil
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+from test_hack import Runner, expect, resolve_binary
+
+
+def remove_tree(path, attempts=8, pause=0.5, rmtree=shutil.rmtree):
+    """Remove the scratch tree. On Windows a just-exited git or hook can still hold a worktree for a moment
+    (WinError 32 on tk-hooks/worktree-1, CI 2026-11-14): retry with a backoff, then warn instead of failing."""
+    for attempt in range(attempts):
+        try:
+            rmtree(path)
+            return True
+        except FileNotFoundError:
+            return True
+        except OSError as exc:
+            if attempt == attempts - 1:
+                print("WARNING: could not remove %s: %s" % (path, exc), file=sys.stderr)
+                return False
+            time.sleep(pause * (attempt + 1))
+    return False
+
+
+def wait_until_released(path, seconds=90):
+    """session-start and the Codex tick each start `tokens --publish` in the background with the worktree as its cwd. Wait for
+    that very process: while it runs, Windows refuses to rename the directory (the same WinError 32 that broke the cleanup);
+    where nothing locks a cwd the rename always works and this costs nothing."""
+    path = Path(path)
+    probe = path.with_name(path.name + ".probe")
+    deadline = time.monotonic() + seconds
+    while True:
+        try:
+            os.rename(str(path), str(probe))
+            os.rename(str(probe), str(path))
+            return True
+        except OSError:
+            if probe.exists() and not path.exists():
+                os.rename(str(probe), str(path))
+            if time.monotonic() > deadline:
+                print("WARNING: %s is still held after %ds" % (path, seconds), file=sys.stderr)
+                return False
+            time.sleep(0.5)
+
+
+def enc(path):
+    return re.sub(r"[^A-Za-z0-9]", "-", str(path))
+
+
+def transcript(cfg, dirname, name, cache_read):
+    d = Path(cfg) / "projects" / dirname
+    d.mkdir(parents=True, exist_ok=True)
+    (d / (name + ".jsonl")).write_text(
+        '{"type":"assistant","message":{"id":"msg_%s","model":"claude-x","usage":{"input_tokens":10,'
+        '"cache_creation_input_tokens":0,"cache_read_input_tokens":%d,"output_tokens":5}}}\n' % (name, cache_read), encoding="utf-8")
+
+
+def env(f, cfg, **extra):
+    e = {"UAK_AGENT": "agent-1", "UAK_HUMAN": "", "UAK_REMOTE": "origin", "CLAUDE_CONFIG_DIR": str(cfg),
+         "CODEX_HOME": str(Path(cfg) / "nocodex"), "UAK_BLACKBOX": "", "UAK_NOW": "1000000"}
+    e.update(extra)
+    return e
+
+
+def tokens(r, f, cfg, *args, cwd=None, **extra):
+    return r.run([r.bash, ".uak/bin/tokens", *args], cwd=cwd or f.clones[0], env=env(f, cfg, **extra), allowed=None)
+
+
+def spend(r, f, name, main_reads, task_reads):
+    cfg = r.scratch / (name + "-claude")
+    main = Path(f.clones[0]).resolve()
+    transcript(cfg, enc(main), "m1", main_reads)
+    transcript(cfg, enc(main) + "-wt-hack-001", "t1", task_reads)
+    return cfg
+
+
+def raw_claims(r, f, files):
+    """Files straight onto claims (what other machines' publishes and black box flushes leave)."""
+    clone = f.base / ("raw-%d" % time.monotonic_ns())
+    r.g(f.base, "clone", "-q", "-b", "claims", f.remote, clone)
+    for rel, text in files.items():
+        (clone / rel).parent.mkdir(parents=True, exist_ok=True)
+        (clone / rel).write_text(text, encoding="utf-8")
+    r.g(clone, "add", "-A")
+    r.g(clone, "-c", "user.name=raw", "-c", "user.email=raw@example.invalid", "commit", "-qm", "raw")
+    r.g(clone, "push", "-q", "origin", "claims")
+
+
+def with_claims(r, name):
+    f = r.fixture(name, count=1)
+    f.claim(0, "HACK-001")
+    return f
+
+
+def publish_failure_is_recorded(r):
+    f = with_claims(r, "tk-fail")
+    cfg = spend(r, f, "tk-fail", 800000, 100000)
+    hook = f.remote / "hooks" / "pre-receive"
+    hook.write_text("#!/bin/sh\necho 'denied by the test remote' >&2\nexit 1\n")
+    os.chmod(hook, 0o755)
+    out = tokens(r, f, cfg, "--publish", "--quiet")
+    expect(out.returncode == 0, "a background publish never fails the caller: " + out.stderr)
+    common = Path(r.g(f.clones[0], "rev-parse", "--path-format=absolute", "--git-common-dir").stdout.strip())
+    pending = (common / "uak-blackbox.pending").read_text(encoding="utf-8") if (common / "uak-blackbox.pending").exists() else ""
+    expect("tokens publish failed" in pending and "denied by the test remote" in pending,
+           "one black box line with the reason, got: " + pending[-600:] + out.stdout + out.stderr)
+    return "black box line"
+
+
+def team_view_names_machines_that_never_reported(r):
+    f = with_claims(r, "tk-team")
+    cfg = spend(r, f, "tk-team", 800000, 100000)
+    pub = tokens(r, f, cfg, "--publish", "--quiet")
+    expect(pub.returncode == 0, "publish: " + pub.stderr)
+    # Two more machines worked (their black box files) and never published; one task ran in a worktree elsewhere.
+    raw_claims(r, f, {"blackbox/2026-11-09-11111.md": "- x\n", "blackbox/2026-11-09-22222.md": "- y\n"})
+    out = tokens(r, f, cfg, "--team")
+    expect(out.returncode == 0, "team: " + out.stderr)
+    expect("NOT REPORTED: 2 machine(s)" in out.stdout and "11111" in out.stdout and "22222" in out.stdout, out.stdout)
+    expect("Totals are from 1 of 3 machines" in out.stdout, "the total says how many reported: " + out.stdout)
+    return "2 machines named"
+
+
+def main_share_is_reported_and_warned(r):
+    f = with_claims(r, "tk-main")
+    cfg = spend(r, f, "tk-main", 800000, 100000)
+    out = tokens(r, f, cfg)
+    expect("main (coordination and work outside tasks) 89%" in out.stdout and "WARNING" in out.stdout, "tokens shows the main share: " + out.stdout)
+    low = spend(r, f, "tk-main-low", 100000, 800000)
+    ok = tokens(r, f, low)
+    expect("main (coordination and work outside tasks) 11%" in ok.stdout and "WARNING" not in ok.stdout, "no warning under 50 %: " + ok.stdout)
+    # The digest says it too, with how many machines the bill covers.
+    pub = tokens(r, f, cfg, "--publish", "--quiet")
+    raw_claims(r, f, {"blackbox/2026-11-09-11111.md": "- x\n", "blackbox/2026-11-09-22222.md": "- y\n"})
+    dig = r.run([r.bash, ".uak/bin/uak", "digest", "--full"], cwd=f.clones[0], env=env(f, cfg), allowed=None)
+    expect("from 1 of 3 machines" in dig.stdout and "main (coordination and work outside tasks) 89%" in dig.stdout and "above 50%" in dig.stdout,
+           "digest Tokens line: " + dig.stdout[-700:] + dig.stderr[-300:])
+    return "share and digest"
+
+
+def hooks_publish_from_session_start_and_codex(r):
+    f = with_claims(r, "tk-hooks")
+    cfg = spend(r, f, "tk-hooks", 800000, 100000)
+    w = f.worktrees[0]
+    common = Path(r.g(w, "rev-parse", "--path-format=absolute", "--git-common-dir").stdout.strip())
+    e = env(f, cfg)
+    stamp = common / "uak-tokens.published"
+    expect(not stamp.exists(), "no stamp yet")
+    r.run([r.bash, "-c", "echo '{\"session_id\":\"s1\"}' | bash .uak/bin/hook session-start"], cwd=w, env=e, allowed=None)
+    expect(stamp.exists(), "session-start publishes (tried now)")
+    wait_until_released(w)
+    stamp.unlink()
+    gd = Path(r.g(w, "rev-parse", "--absolute-git-dir").stdout.strip())
+    (gd / "uak-harness").write_bytes(b"codex\r\n")  # as Windows writes it
+    r.run([r.bash, "-c", "echo '{}' | bash .uak/bin/hook tick"], cwd=w, env=e, allowed=None)
+    expect(stamp.exists(), "the Codex tick publishes")
+    wait_until_released(w)
+    return "session-start and codex tick"
+
+
+def team_view_without_black_box_files_still_reads_the_tokens(r):
+    """claims with tokens/ and tasks/ but no blackbox/ (the common case early on): --team reads them (macOS CI, bsdtar)."""
+    f = with_claims(r, "tk-noblackbox")
+    cfg = spend(r, f, "tk-noblackbox", 800000, 100000)
+    expect(tokens(r, f, cfg, "--publish", "--quiet").returncode == 0, "publish")
+    out = tokens(r, f, cfg, "--team", "--by", "agent", "--json")
+    expect(out.returncode == 0 and '"main"' in out.stdout and "agent-1" in out.stdout, "team view: rc %d %s%s" % (out.returncode, out.stdout, out.stderr))
+    return "team view"
+
+
+def cleanup_survives_locked_worktree(r):
+    calls = []
+
+    def locked_twice(path):
+        calls.append(path)
+        if len(calls) < 3:
+            raise PermissionError(13, "[WinError 32] The process cannot access the file", str(path))
+    expect(remove_tree("x", attempts=5, pause=0, rmtree=locked_twice) is True and len(calls) == 3, "retries until the lock is gone: %d" % len(calls))
+
+    def always_locked(path):
+        raise PermissionError(13, "[WinError 32] locked", str(path))
+    expect(remove_tree("x", attempts=3, pause=0, rmtree=always_locked) is False, "a cleanup that never works is a warning, not a raise")
+    return "retry then warn"
+
+
+TESTS = [cleanup_survives_locked_worktree, team_view_without_black_box_files_still_reads_the_tokens, publish_failure_is_recorded, team_view_names_machines_that_never_reported, main_share_is_reported_and_warned,
+         hooks_publish_from_session_start_and_codex]
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--package", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--jobs", type=int, default=2)
+    parser.add_argument("--case", action="append")
+    args = parser.parse_args()
+    tmp = tempfile.mkdtemp(prefix="uak-tokens-coverage-")
+    try:
+        runner = Runner(args.package.resolve(), Path(tmp), resolve_binary("bash"), resolve_binary("git"))
+
+        def one(test):
+            started = time.monotonic()
+            try:
+                note = test(runner)
+                return test.__name__, True, "%s, %.2fs" % (note, time.monotonic() - started)
+            except Exception as exc:  # noqa: BLE001
+                return test.__name__, False, str(exc)[:2500]
+        selected = [t for t in TESTS if not args.case or t.__name__ in args.case]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            results = list(pool.map(one, selected))
+    finally:
+        remove_tree(tmp)
+    for name, ok, info in results:
+        print(("PASS " if ok else "FAIL ") + name + " (" + info + ")")
+    passed = sum(1 for _, ok, _ in results if ok)
+    print("TOKENS_COVERAGE_RESULT %s passed=%d failed=%d" % ("PASS" if passed == len(results) else "FAIL", passed, len(results) - passed))
+    return 0 if passed == len(results) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
