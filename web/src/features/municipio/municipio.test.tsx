@@ -43,3 +43,10 @@ test("subir_archivo_marca_recibido", async () => {
   expect(post[0]).toBe(`/api/documentos/${pendiente.id}/archivo`);
   expect((post[1]!.body as FormData).get("archivo")).toBeInstanceOf(File);
 });
+
+test("municipio_enlaza_a_su_carta", async () => {
+  vi.stubGlobal("fetch", vi.fn(async () => json(jornada)));
+  montar();
+  const enlace = await screen.findByRole("link", { name: /carta compromiso/i });
+  expect(enlace).toHaveAttribute("href", "/m/1/carta");
+});

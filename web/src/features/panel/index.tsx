@@ -1,7 +1,7 @@
 // Panel de Eira: jornadas por riesgo con semáforo de días restantes. Se refresca en vivo por SSE.
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
-import { listarJornadas, suscribir, type Jornada } from "../../lib/api";
+import { crearJornada, listarJornadas, solicitarAcceso, suscribir, type Jornada } from "../../lib/api";
 import {
   Button,
   EmptyState,
@@ -17,6 +17,7 @@ import {
   Skeleton,
   Stat,
   Surface,
+  TextField,
   type ColorSemaforo,
 } from "../../lib/ui";
 
@@ -39,6 +40,38 @@ export default function Panel() {
   const [jornadas, setJornadas] = useState<Jornada[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navegar = useNavigate();
+  const [formAbierto, setFormAbierto] = useState(false);
+  const [creando, setCreando] = useState(false);
+  const [errorCrear, setErrorCrear] = useState<string | null>(null);
+  const [acceso, setAcceso] = useState<{ municipio: string; enlace: string } | null>(null);
+  const [errorAcceso, setErrorAcceso] = useState<string | null>(null);
+
+  const crear = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const campo = (k: string) => String(f.get(k) ?? "").trim();
+    setCreando(true);
+    setErrorCrear(null);
+    try {
+      const nueva = await crearJornada({ municipio: { nombre: campo("municipio") }, sede: campo("sede"), fecha: campo("fecha") });
+      setJornadas((js) => [nueva, ...(js ?? []).filter((j) => j.id !== nueva.id)]);
+      setFormAbierto(false);
+    } catch (err) {
+      setErrorCrear((err as Error).message);
+    } finally {
+      setCreando(false);
+    }
+  };
+
+  const enviarAcceso = async (j: Jornada) => {
+    setErrorAcceso(null);
+    try {
+      const { token } = await solicitarAcceso(j.id);
+      setAcceso({ municipio: j.municipio?.nombre ?? `Jornada ${j.id}`, enlace: `/m/${j.id}#t=${encodeURIComponent(token)}` });
+    } catch (err) {
+      setErrorAcceso((err as Error).message);
+    }
+  };
 
   useEffect(() => {
     let vivo = true;
@@ -79,6 +112,11 @@ export default function Panel() {
               ? `${plural(rojas, "jornada", "jornadas")} en rojo. Qué necesita atención y qué la bloquea.`
               : "Qué jornadas necesitan atención y qué las bloquea."
           }
+          actions={
+            <Button variant={formAbierto ? "secondary" : "primary"} aria-expanded={formAbierto} onClick={() => setFormAbierto((v) => !v)}>
+              Nueva jornada
+            </Button>
+          }
         />
       }
     >
@@ -90,6 +128,46 @@ export default function Panel() {
         </Surface>
       ) : (
         <>
+          {formAbierto && (
+            <Surface>
+              <SectionHeader title="Nueva jornada" description="Al crearla se arma el expediente con los requisitos de siempre." />
+              <form onSubmit={crear} className="grid gap-4 sm:grid-cols-3">
+                <TextField label="Municipio" name="municipio" required autoComplete="off" />
+                <TextField label="Sede" name="sede" required autoComplete="off" />
+                <TextField label="Fecha" name="fecha" type="date" required />
+                <div className="flex flex-wrap items-center gap-3 sm:col-span-3">
+                  <Button type="submit" disabled={creando}>
+                    {creando ? "Creando…" : "Crear jornada"}
+                  </Button>
+                  <Button type="button" variant="secondary" onClick={() => setFormAbierto(false)}>
+                    Cancelar
+                  </Button>
+                  {errorCrear && (
+                    <p role="alert" className="text-sm text-bad">
+                      No se pudo crear: {errorCrear}
+                    </p>
+                  )}
+                </div>
+              </form>
+            </Surface>
+          )}
+          {(acceso || errorAcceso) && (
+            <Surface>
+              {acceso ? (
+                <div role="status" className="flex flex-col gap-1">
+                  <p className="text-sm font-semibold text-fg">Enlace de acceso para {acceso.municipio}</p>
+                  <a href={acceso.enlace} className="break-all font-semibold text-accent underline underline-offset-4">
+                    {acceso.enlace}
+                  </a>
+                  <p className="text-xs text-fg-2">Solo demo: en producción este enlace llega por correo al municipio.</p>
+                </div>
+              ) : (
+                <p role="alert" className="text-sm text-bad">
+                  No se pudo emitir el enlace: {errorAcceso}
+                </p>
+              )}
+            </Surface>
+          )}
           <Surface>
             <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-center">
               <div className="flex flex-wrap items-end gap-x-10 gap-y-6">
@@ -134,6 +212,14 @@ export default function Panel() {
                         </span>
                         <Button variant="secondary" size="sm" onClick={() => navegar(`/panel/${j.id}/revision`)}>
                           Abrir expediente
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          aria-label={`Enviar acceso a ${j.municipio?.nombre ?? `jornada ${j.id}`}`}
+                          onClick={() => enviarAcceso(j)}
+                        >
+                          Enviar acceso
                         </Button>
                       </>
                     }
