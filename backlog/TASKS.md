@@ -161,3 +161,15 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Acceptance:**
   - Seed de datos demo, core.test con mkdtemp y despachador de recordatorios en index.js
 - **Verify:** `npm test`
+
+## HACK-012 · App.tsx registra la ruta y la vista que exporta cada feature, para que 006, 007, 008 y 010 no lo editen (follow-up of HACK-002)
+
+- **Type:** follow-up
+- **Priority:** P1
+- **Depends on:** HACK-002
+- **Follow-up of:** HACK-002
+- **Paths:** web/DESIGN.md, web/src/index.css, web/src/lib/ui/, web/src/App.tsx, web/src/main.tsx, web/public/design-lock/, web/package.json, web/package-lock.json, web/index.html, web/vite.config.ts, web/tsconfig.json
+- **Freeze-Allowed:** no
+- **Acceptance:**
+  - App.tsx registra la ruta y la vista que exporta cada feature, para que 006, 007, 008 y 010 no lo editen
+- **Verify:** `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png && bash .uak/bin/uak lint`
