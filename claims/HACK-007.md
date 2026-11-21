@@ -9,10 +9,10 @@ Priority: P0
 Paths: web/src/features/carta/
 Depends: HACK-002
 Verify: `npm --prefix web run build && npm --prefix web test -- --run`
-Lease-Until: 1795305274
-Updated: 1795290874
+Lease-Until: 1795305342
+Updated: 1795290942
 Task-Base: fdadcd420ed4487f24b2ff855e2cddc14ca9d74a
-Next: Another agent reviews https://github.com/zoe718/NerdHack/pull/12; run .uak/bin/smoke
+Next: Wait for review of SHA 80d5df5
 PR: https://github.com/zoe718/NerdHack/pull/12
 Evidence: -
 Thread-Read: 0
