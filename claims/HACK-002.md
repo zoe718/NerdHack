@@ -9,8 +9,8 @@ Priority: P0
 Paths: web/DESIGN.md, web/src/index.css, web/src/lib/ui/, web/src/App.tsx, web/src/main.tsx, web/public/design-lock/, web/package.json, web/package-lock.json, web/index.html, web/vite.config.ts, web/tsconfig.json
 Depends: None
 Verify: `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png && bash .uak/bin/uak lint`
-Lease-Until: 1795289031
-Updated: 1795286331
+Lease-Until: 1795289829
+Updated: 1795287129
 Task-Base: 9af195ed3e8364aa614ab174be4daee4a5de3fb1
 Next: `/uak-design-lock`
 PR: -
