@@ -1,6 +1,6 @@
 # HACK-006
 ID: HACK-006
-State: CLAIMED
+State: REVIEW
 Owner: devin-1
 Branch: feat/hack-006
 Worktree: /c/Users/zm180/OneDrive/Desktop/NerdHackDevin/NerdHack-wt/hack-006
@@ -9,10 +9,10 @@ Priority: P0
 Paths: web/src/features/revision/
 Depends: HACK-002
 Verify: `npm --prefix web run build && npm --prefix web test -- --run`
-Lease-Until: 1795292562
-Updated: 1795289862
+Lease-Until: 1795304661
+Updated: 1795290261
 Task-Base: 11cb8fd6f2ccc8a4aef1312c6b18975ea987c481
-Next: leer `web/DESIGN.md`, tests en vitest y `uak red HACK-006`
-PR: -
+Next: Another agent reviews https://github.com/zoe718/NerdHack/pull/10; run .uak/bin/smoke
+PR: https://github.com/zoe718/NerdHack/pull/10
 Evidence: -
 Thread-Read: 0
