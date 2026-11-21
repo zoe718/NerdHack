@@ -92,6 +92,25 @@ export async function consumirToken(token: string): Promise<number> {
   return r.jornada_id;
 }
 
+export type NuevaJornada = { municipio: { nombre: string }; sede: string; fecha: string };
+
+export function crearJornada(datos: NuevaJornada): Promise<Jornada> {
+  return pedir<Jornada>("/jornadas", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(datos),
+  });
+}
+
+/** Emite un enlace de acceso para el municipio. En la demo se muestra en pantalla en vez de enviarse por correo. */
+export function solicitarAcceso(jornadaId: number): Promise<{ token: string; expira: string }> {
+  return pedir("/magic/solicitar", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ jornada_id: jornadaId }),
+  });
+}
+
 export async function subirArchivo(documentoId: number, archivo: File): Promise<Documento> {
   const datos = new FormData();
   datos.append("archivo", archivo);

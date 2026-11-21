@@ -1,6 +1,6 @@
 // Vista del municipio: qué falta para su jornada, observaciones de Eira y subida de archivos. En vivo por SSE.
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import {
   consumirToken,
   obtenerJornada,
@@ -138,6 +138,15 @@ export default function Municipio() {
           demo={Boolean(j.demo_data)}
           title={`Jornada en ${municipio}`}
           lead="Aquí ves qué falta para tu jornada y lo que Eira ya revisó."
+          actions={
+            <Link
+              to={`/m/${j.id}/carta`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-fg-2 hover:text-fg"
+            >
+              <FileTextIcon aria-hidden />
+              Carta compromiso
+            </Link>
+          }
           meta={
             <>
               <MetaItem icon={<MapPinIcon aria-hidden />}>{j.sede}</MetaItem>
