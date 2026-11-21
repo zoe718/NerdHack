@@ -7,3 +7,4 @@ Why: a reversible option after 15 min keeps work moving.
 - 1795284429 | plan | zoe718/zoe718 | tasks added: HACK-006 HACK-007 HACK-008 HACK-009 HACK-010 | Why: backlog without PR (Plan-Channel: claims)
 - 1795286620 | HACK-011 | follow-up of HACK-001 by claude-1: Seed de datos demo, core.test con mkdtemp y despachador de recordatorios en index.js | Why: same Paths, no scope change
 - 1795287811 | HACK-002 | Direction 1 Rosa y berenjena, elegida por zoe718 | Why: pick humano desde la galeria de 4 direcciones sobre pantallas reales
+- 1795288869 | deadline decision/HACK-002-1795287638/1795288538 | BLOCKED_OTHER_TASK | Option: Direction 1: Rosa y berenjena; Why: zoe718 la eligio mirando la galeria de 4 direcciones sobre las pantallas reales (panel, municipio, carta); clara, barra berenjena, acciones en rosa Eira; no money, accounts, publishing or scope expansion.
