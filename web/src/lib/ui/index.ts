@@ -6,6 +6,7 @@ export * from "./Field";
 export * from "./icons";
 export * from "./Page";
 export * from "./Row";
+export * from "./rutas";
 export * from "./Semaforo";
 export * from "./Stat";
 export * from "./Surface";
