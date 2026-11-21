@@ -1,0 +1,12 @@
+# worklog/WL-1795284986-devin-1-HACK-002-hack.b3mK4d.md · HACK-002
+
+## Live summary
+- Done: Claim created; implementation pending
+- Decision: Own branch and worktree
+- Why: Parallel work without touching the main checkout
+- Failing: No validation run yet
+- Commands: `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png && bash .uak/bin/uak lint`
+- Next: `/uak-design-lock`
+
+## History
+- 1795284986 | CLAIMED | devin-1 | claim; next: `/uak-design-lock` | Harness: unknown | Model: unknown
