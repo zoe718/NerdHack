@@ -1,6 +1,6 @@
 # HACK-004
 ID: HACK-004
-State: CLAIMED
+State: REVIEW
 Owner: claude-1
 Branch: feat/hack-004
 Worktree: /c/Users/zm180/Documents/NerdHack-wt/hack-004
@@ -9,14 +9,15 @@ Priority: P0
 Paths: web/src/features/municipio/, web/src/features/panel/, web/src/lib/api.ts, web/src/mocks/
 Depends: HACK-002
 Verify: `npm --prefix web run build && npm --prefix web test -- --run`
-Lease-Until: 1795291745
-Updated: 1795289045
+Lease-Until: 1795304929
+Updated: 1795290529
 Task-Base: 11cb8fd6f2ccc8a4aef1312c6b18975ea987c481
-Next: leer `web/DESIGN.md`, escribir los tests en vitest y `uak red HACK-004`
-PR: -
-Evidence: -
+Next: Another agent reviews https://github.com/zoe718/NerdHack/pull/11; run .uak/bin/smoke
+PR: https://github.com/zoe718/NerdHack/pull/11
+Evidence: build+test OK, shots panel/municipio 1280/390, 0 console errors · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log) · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log) · red at 11cb8fd: exit 1 (no assertion line recognized: the reviewer reads the log)
 Participants: author claude-1 (unknown)
-Events: 1
+Events: 2
 Checkpoints: 0
 Sessions: 1
 Last-Checkpoint: 0
+Task-Tip: 7b8ecb893e50bcbd31285283759da3f04f24c70b
