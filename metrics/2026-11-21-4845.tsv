@@ -24,6 +24,7 @@
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 # ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
+# ledger: epoch, command, task, exit, code, ms, agent, harness (exit - = ended in an exec; #sum rows = older lines, counted)
 1795280509	hook-digest	-	0	-	3752	-	other
 1795280834	hook-digest	-	0	-	3842	-	other
 1795281174	hook-digest	-	0	-	4084	-	other
@@ -158,3 +159,18 @@
 1795288993	next	-	0	-	19103	claude-1	claude-code
 1795287549	hook-digest	-	0	-	6139	-	claude-code
 1795287630	hook-digest	-	0	-	7338	-	claude-code
+1795288878	status	HACK-002	0	-	19199	devin-1	other
+1795288913	heartbeat	HACK-002	0	-	14356	devin-1	other
+1795288955	merge	HACK-002	0	-	40850	devin-1	other
+1795289016	integrate	HACK-002	0	-	6471	devin-1	other
+1795289051	next	-	0	-	12421	devin-1	other
+1795289083	claim	HACK-004	3	already-claimed	8668	devin-1	other
+1795289168	next	-	0	-	11213	devin-1	other
+1795289168	board	-	-	-	-	-	other
+1795289215	claim	HACK-006	0	-	23021	devin-1	other
+1795289219	inbox	-	0	-	3926	devin-1	other
+1795289393	followup	HACK-002	0	-	10038	devin-1	other
+1795289405	release	HACK-006	0	-	11176	devin-1	other
+1795289443	claim	HACK-012	0	-	24638	devin-1	other
+1795289447	inbox	-	0	-	3908	devin-1	other
+1795289508	red	HACK-012	-	-	-	devin-1	other
