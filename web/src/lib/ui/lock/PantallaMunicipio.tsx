@@ -82,13 +82,15 @@ export function PantallaMunicipio() {
     >
       <Surface>
         <div role="status" className="flex flex-wrap items-center gap-4 rounded-md bg-warn-soft p-4 text-warn-soft-ink">
-          <WarningCircleIcon size={28} aria-hidden className="shrink-0" />
-          <div className="min-w-0 flex-1 basis-64">
-            <p className="font-display text-lg font-bold">Eira pidió un cambio en {observacion.requisito}</p>
-            <p className="text-base">“{observacion.motivo}”</p>
-            <p className="mt-1 text-sm">
-              {observacion.autora}, {observacion.cuando}
-            </p>
+          <div className="flex min-w-0 flex-1 basis-64 items-start gap-3">
+            <WarningCircleIcon size={28} aria-hidden className="mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="font-display text-lg font-bold">Eira pidió un cambio en {observacion.requisito}</p>
+              <p className="text-base">“{observacion.motivo}”</p>
+              <p className="mt-1 text-sm">
+                {observacion.autora}, {observacion.cuando}
+              </p>
+            </div>
           </div>
           <Button icon={<UploadSimpleIcon aria-hidden />}>Subir nueva versión</Button>
         </div>
