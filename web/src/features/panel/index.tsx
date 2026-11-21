@@ -113,7 +113,7 @@ export default function Panel() {
               : "Qué jornadas necesitan atención y qué las bloquea."
           }
           actions={
-            <Button aria-expanded={formAbierto} onClick={() => setFormAbierto((v) => !v)}>
+            <Button variant={formAbierto ? "secondary" : "primary"} aria-expanded={formAbierto} onClick={() => setFormAbierto((v) => !v)}>
               Nueva jornada
             </Button>
           }
