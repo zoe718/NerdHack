@@ -12,11 +12,11 @@ Verify: `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png &
 Lease-Until: 1795303299
 Updated: 1795288899
 Task-Base: 9af195ed3e8364aa614ab174be4daee4a5de3fb1
-Next: Wait for review of SHA c14f1d6
+Next: Humano: Shared resource/CI needs a human: web/package-lock.json
 PR: https://github.com/zoe718/NerdHack/pull/7
 Evidence: Verify exit 0 (LINT_OK); npm --prefix web run build exit 0; npm --prefix web test -- --run 4 passed; design-lint PASS; capturas 1280 y 390 en web/public/design-lock/screens; smoke del servidor no corrido aqui: better-sqlite3 no compila sin MSVC en este worktree y el diff solo toca web/
-Participants: author devin-1 (unknown); reviewer claude-1 (claude-opus-5-5) approve
-Events: 9
+Participants: author devin-1 (unknown); reviewer claude-1 (claude-opus-5-5) approve; merged-by devin-1 (unknown)
+Events: 10
 Checkpoints: 1
 Sessions: 2
 Last-Checkpoint: 1795287811

@@ -1,5 +1,5 @@
 ID: HACK-002
-State: MERGING
+State: HUMAN
 Owner: devin-1
-Queued: 1795288915
-Reason: Waiting for queue
+Updated: 1795288928
+Reason: Shared resource/CI needs a human: web/package-lock.json

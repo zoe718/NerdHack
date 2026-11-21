@@ -6,7 +6,7 @@
 - Why: pick humano desde la galeria de 4 direcciones sobre pantallas reales
 - Failing: 3 subagentes en segundo plano terminaron vacios; npm ci de la raiz falla aqui: better-sqlite3 sin MSVC
 - Commands: npm --prefix web run build; npm --prefix web test -- --run; bash .uak/bin/design-lint; python .uak-shots/shoot.py
-- Next: Wait for review of SHA c14f1d6
+- Next: Humano: Shared resource/CI needs a human: web/package-lock.json
 
 ## History
 - 1795284986 | CLAIMED | devin-1 | claim; next: `/uak-design-lock` | Harness: unknown | Model: unknown
@@ -18,3 +18,4 @@
 - 1795287811 | REVIEW | devin-1 | checkpoint; next: Wait for review of SHA c14f1d6 | Harness: unknown | Model: unknown
 - 1795288111 | REVIEW | claude-1 | review; approve; SHA c14f1d6a12cd853f215e403780f38f7c5d07859f; reviewer claude-1 | Harness: claude-code | Model: claude-opus-5-5
 - 1795288899 | REVIEW | devin-1 | heartbeat; lease until 1795303299 | Harness: unknown | Model: unknown
+- 1795288928 | REVIEW | devin-1 | merge rechazado; Shared resource/CI needs a human: web/package-lock.json | Harness: unknown | Model: unknown

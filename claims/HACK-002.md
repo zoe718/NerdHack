@@ -12,7 +12,7 @@ Verify: `test -s web/DESIGN.md && ls web/public/design-lock/screens/*-1280.png &
 Lease-Until: 1795303299
 Updated: 1795288899
 Task-Base: 9af195ed3e8364aa614ab174be4daee4a5de3fb1
-Next: Wait for review of SHA c14f1d6
+Next: Humano: Shared resource/CI needs a human: web/package-lock.json
 PR: https://github.com/zoe718/NerdHack/pull/7
 Evidence: -
 Thread-Read: 8
