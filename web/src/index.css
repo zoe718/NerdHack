@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f6f3f8;
+  --surface: #ffffff;
+  --surface-2: #eee9f2;
+  --text: #1e1826;
+  --text-2: #5a5266;
+  --line: #dcd5e3;
+  --accent: #c2185b;
+  --accent-ink: #ffffff;
+  --accent-soft: #fce4ec;
+  --accent-soft-ink: #8a1040;
+  --ok: #1b7f4d;
+  --ok-ink: #ffffff;
+  --ok-soft: #def4e6;
+  --ok-soft-ink: #125a37;
+  --warn: #f2ae17;
+  --warn-ink: #3a2900;
+  --warn-soft: #fdf0cc;
+  --warn-soft-ink: #6a4a00;
+  --bad: #c93a2c;
+  --bad-ink: #ffffff;
+  --bad-soft: #fce3df;
+  --bad-soft-ink: #8f2218;
+  --info: #3d5a96;
+  --info-ink: #ffffff;
+  --info-soft: #e4eaf7;
+  --info-soft-ink: #2a4070;
+  --shell: #2b1a3f;
+  --shell-ink: #ffffff;
+  --shell-ink-2: #cdbfe0;
+  --shell-2: #412a5c;
+  --shell-line: #2b1a3f;
+  --focus: var(--accent);
+  --display: "Quicksand", ui-rounded, system-ui, sans-serif;
+  --body: "Cabin", system-ui, sans-serif;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 18px;
+  --elevation: 0 0 0 0 rgb(0 0 0 / 0);
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--text);
+  --color-fg-2: var(--text-2);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-ink: var(--accent-soft-ink);
+  --color-ok: var(--ok);
+  --color-ok-ink: var(--ok-ink);
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-soft-ink: var(--ok-soft-ink);
+  --color-warn: var(--warn);
+  --color-warn-ink: var(--warn-ink);
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-soft-ink: var(--warn-soft-ink);
+  --color-bad: var(--bad);
+  --color-bad-ink: var(--bad-ink);
+  --color-bad-soft: var(--bad-soft);
+  --color-bad-soft-ink: var(--bad-soft-ink);
+  --color-info: var(--info);
+  --color-info-ink: var(--info-ink);
+  --color-info-soft: var(--info-soft);
+  --color-info-soft-ink: var(--info-soft-ink);
+  --color-shell: var(--shell);
+  --color-shell-ink: var(--shell-ink);
+  --color-shell-ink-2: var(--shell-ink-2);
+  --color-shell-2: var(--shell-2);
+  --color-shell-line: var(--shell-line);
+
+  --font-*: initial;
+  --font-display: var(--display);
+  --font-sans: var(--body);
+
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.75rem;
+  --text-xl--line-height: 2.125rem;
+  --text-hero: 3.5rem;
+  --text-hero--line-height: 1;
+
+  --radius-*: initial;
+  --radius-sm: var(--radius-s);
+  --radius-md: var(--radius-m);
+  --radius-lg: var(--radius-l);
+
+  --shadow-*: initial;
+  --shadow-raise: var(--elevation);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--display);
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
