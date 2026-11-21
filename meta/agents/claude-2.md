@@ -1,0 +1,11 @@
+# claude-2
+Agent: claude-2
+Started: 1795291839
+Events: 1
+Events-Since-Checkpoint: 1
+Checkpoints: 0
+Sessions: 1
+Last-Checkpoint: 0
+Human: zoe718
+Last-Session: claude-2-1795291836
+Updated: 1795291839
