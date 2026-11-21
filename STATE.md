@@ -1,7 +1,7 @@
 # STATE
 
 Phase: execution
-Updated: 1795284323
+Updated: 1795284429
 AVAILABLE: HACK-002 HACK-003 HACK-004 HACK-005 HACK-002 HACK-003 HACK-004 HACK-005 
 CLAIMED: HACK-001 
 BLOCKED: -
@@ -16,6 +16,7 @@ Blockers: BLOCKED tasks; use status --task ID --summary.
 Current decisions (last 5):
 - 1795283681 | deadline freeze/event/1795274100 | FREEZE_DEMO_FIXES_ONLY | New claims only with Freeze-Allowed: yes; respect authorization.
 - 1795283923 | plan | zoe718/zoe718 | tasks added: HACK-001 HACK-002 HACK-003 HACK-004 HACK-005 | Why: backlog without PR (Plan-Channel: claims)
+- 1795284429 | plan | zoe718/zoe718 | tasks added: HACK-006 HACK-007 HACK-008 HACK-009 HACK-010 | Why: backlog without PR (Plan-Channel: claims)
 
 Global next step: available P0; else review PRs, tests, demo, rehearsal.
 Why: bounded snapshot to resume without rereading history.

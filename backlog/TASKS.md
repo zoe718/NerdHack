@@ -75,3 +75,77 @@ Append-only; added to .uak/TASKS.md from main. Why: adding tasks never waits for
 - **Test-First:** no (landing, video y docs)
 - **Verify:** `npm --prefix web run build && bash .uak/bin/design-lint`
 - **Next step:** skill `landing-story` con IDEA.md y capturas de HACK-004
+## HACK-006 · Revisión de Eira: observar o aprobar requisito con motivo
+- **Type:** feature
+- **Priority:** P0
+- **Estimate:** 40 min
+- **Rubric / Spec:** C1, C2 · Reto 2 demo: solicitar corrección, aprobar requisito
+- **Depends on:** HACK-002
+- **Uses contract:** HACK-001
+- **Related:** HACK-004
+- **Paths:** web/src/features/revision/
+- **Freeze-Allowed:** no
+- **Acceptance:** Recipe: detail · Hero: el archivo subido con sus botones Aprobar / Observar, `/panel/:jornada/revision` lista requisitos `recibido`; Observar exige motivo (no deja enviar vacío); Aprobar cambia el estado al instante, muestra versiones del archivo (v1, v2…) con fecha y sha256 corto, usa mocks de `web/src/mocks/` hasta que HACK-001 integre, capturas en `.uak-shots/HACK-006/` y SHIP de `design-critic`
+- **Tests:** observar_sin_motivo_no_envia, aprobar_marca_aprobado, muestra_versiones_del_archivo
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+- **Next step:** leer `web/DESIGN.md`, tests en vitest y `uak red HACK-006`
+
+## HACK-007 · Editor de carta compromiso con cláusulas bloqueadas e historial
+- **Type:** feature
+- **Priority:** P0
+- **Estimate:** 45 min
+- **Rubric / Spec:** C1, C2 · Reto 2: campos variables, cláusulas fijas, versiones y trazabilidad
+- **Depends on:** HACK-002
+- **Uses contract:** HACK-003
+- **Related:** HACK-003
+- **Paths:** web/src/features/carta/
+- **Freeze-Allowed:** no
+- **Acceptance:** Recipe: flow · Hero: la carta con los campos variables editables y las cláusulas con candado, campos variables (municipio, sede, fecha, servicios, persona enlace) editables; cláusulas protegidas de solo lectura con candado, si la API responde 422 muestra "Esta cláusula no se puede modificar", historial de versiones de la carta con quién y cuándo, capturas en `.uak-shots/HACK-007/` y SHIP de `design-critic`
+- **Tests:** clausula_protegida_es_solo_lectura, error_422_muestra_aviso, guardar_crea_nueva_version
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+- **Next step:** leer `web/DESIGN.md`, tests en vitest y `uak red HACK-007`
+
+## HACK-008 · Pendientes por municipio y expediente de jornada
+- **Type:** feature
+- **Priority:** P0
+- **Estimate:** 40 min
+- **Rubric / Spec:** C1, C2 · Reto 2 demo: ver pendientes por municipio; expediente con servicios y responsables
+- **Depends on:** HACK-002
+- **Uses contract:** HACK-001, HACK-009
+- **Related:** HACK-004
+- **Paths:** web/src/features/pendientes/, web/src/features/expediente/
+- **Freeze-Allowed:** no
+- **Acceptance:** Recipe: list · Hero: municipios ordenados por pendientes críticos, `/pendientes` agrupa por municipio: cuántos pendientes, cuál es el más urgente, semáforo, `/panel/:jornada` expediente: municipio, sede, fecha, servicios, responsables, persona enlace y checklist, capturas en `.uak-shots/HACK-008/` y SHIP de `design-critic`
+- **Tests:** agrupa_pendientes_por_municipio, ordena_municipios_por_urgencia, expediente_muestra_servicios_y_responsables
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+- **Next step:** leer `web/DESIGN.md`, tests en vitest y `uak red HACK-008`
+
+## HACK-009 · API de requisitos configurables y pendientes por municipio
+- **Type:** feature
+- **Priority:** P0
+- **Estimate:** 30 min
+- **Rubric / Spec:** C1 · Reto 2: lista de requisitos configurable (carta compromiso, fotos del espacio, logotipos, persona enlace)
+- **Depends on:** HACK-001
+- **Uses contract:** HACK-001
+- **Related:** HACK-008
+- **Paths:** server/routes/requisitos.js, server/routes/pendientes.js, server/tests/requisitos.test.js
+- **Freeze-Allowed:** no
+- **Acceptance:** `GET/POST /api/requisitos` catálogo editable; el default trae carta compromiso, fotos del espacio, logotipos y persona enlace, crear jornada con un subconjunto de requisitos crea solo esos documentos, `GET /api/pendientes` agrupa por municipio con conteo y el más urgente
+- **Tests:** catalogo_default_trae_cuatro_requisitos, jornada_usa_solo_requisitos_elegidos, pendientes_agrupa_por_municipio
+- **Verify:** `npm test`
+- **Next step:** tests con node:test y `uak red HACK-009`
+
+## HACK-010 · Bitácora de auditoría y pulido móvil
+- **Type:** feature
+- **Priority:** P1
+- **Estimate:** 35 min
+- **Rubric / Spec:** C2, C3 · Reto 2: trazabilidad; municipio usa celular
+- **Depends on:** HACK-002, HACK-004
+- **Uses contract:** HACK-003
+- **Related:** HACK-004
+- **Paths:** web/src/features/bitacora/
+- **Freeze-Allowed:** no
+- **Acceptance:** Recipe: list · Hero: línea de tiempo de cambios por jornada, `/panel/:jornada/bitacora` muestra quién hizo qué y cuándo (subida, observación, aprobación, cambio de carta), vista del municipio usable a 390×844 sin scroll horizontal, capturas 1280×720 y 390×844 en `.uak-shots/HACK-010/` y SHIP de `design-critic`
+- **Tests:** bitacora_ordena_eventos_recientes_primero, muestra_actor_y_accion
+- **Verify:** `npm --prefix web run build && npm --prefix web test -- --run`
+- **Next step:** tests en vitest y `uak red HACK-010`
